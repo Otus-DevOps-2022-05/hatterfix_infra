@@ -2,6 +2,7 @@
 echo "Installing git:"
 PACKS="git"
 USER="yc-user"
+PATH-$(pwd)
 apt-get update
 apt-get install $PACKS -y
 
@@ -15,7 +16,7 @@ ls -l
 
 echo "move to reddit project folder:"
 
-cd ~/reddit/
+cd /$PATH/reddit/
 
 echo "install bundle dependencies:"
 
