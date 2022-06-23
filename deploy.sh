@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Installing git:"
 PACKS="git"
-USER="root"
+USER="yc-user"
 apt-get update
 apt-get install $PACKS -y
 
@@ -11,7 +11,7 @@ git clone -b monolith https://github.com/express42/reddit.git
 
 echo "move to reddit project folder:"
 
-cd /home/$USER/reddit/
+cd ~/reddit/
 
 echo "install bundle dependencies:"
 

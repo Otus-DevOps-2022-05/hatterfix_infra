@@ -2,7 +2,7 @@
 
 echo "Installing mongodb  pack:"
 PACKS="libcurl3 git"
-USER="root"
+USER="yc-user"
 DEBPATH="/home/$USER/MongoDB/4.2/"
 DEBINST="mongodb-org-tools_4.2.10_amd64.deb mongodb-org-mongos_4.2.10_amd64.deb mongodb-org-server_4.2.10_amd64.deb mongodb-org-shell_4.2.10_amd64.deb mongodb-org_4.2.10_amd64.deb"
 
