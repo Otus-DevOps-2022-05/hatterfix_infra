@@ -9,6 +9,10 @@ echo "clone remote branch monolith to our folder:"
 
 git clone -b monolith https://github.com/express42/reddit.git
 
+pwd
+
+ls -l
+
 echo "move to reddit project folder:"
 
 cd ~/reddit/
