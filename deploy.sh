@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Installing git:"
 PACKS="git"
-USER="yc-user"
+USER="root"
 apt-get update
 apt-get install $PACKS -y
 
