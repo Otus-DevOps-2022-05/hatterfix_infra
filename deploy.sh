@@ -16,9 +16,10 @@ ls -l
 
 echo "move to reddit project folder:"
 
-cd /$PATH/reddit/
+cd reddit/
 
 echo "install bundle dependencies:"
+
 
 /usr/bin/bundle install
 
