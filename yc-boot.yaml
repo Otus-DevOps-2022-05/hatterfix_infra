@@ -25,7 +25,7 @@ write_files:
       echo "clone remote branch monolith to our folder:"
       git clone -b monolith https://github.com/express42/reddit.git
       echo "move to reddit project folder:"
-      cd reddit/
+      cd /reddit/
       echo "install bundle dependencies:"
       /usr/bin/bundle install
       echo "run app:"
