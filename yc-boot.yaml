@@ -9,28 +9,14 @@ users:
 package_update: true
 packages:
   - git
-#create script
-write_files:
-  - path: /home/yc-user/bootstrap.sh
-    permissions: "775"
-    owner: yc-user:yc-user
-    content: |
-      echo "Installing ruby & bundle packs:"
-      PACKS="ruby-full ruby-bundler build-essential mongodb git"
-      apt-get update
-      apt-get install $PACKS -y
-      echo "run & put mongodb to autostart:"
-      systemctl start mongodb
-      systemctl enable mongodb
-      echo "clone remote branch monolith to our folder:"
-      git clone -b monolith https://github.com/express42/reddit.git
-      echo "move to reddit project folder:"
-      cd /reddit/
-      echo "install bundle dependencies:"
-      /usr/bin/bundle install
-      echo "run app:"
-      puma -d
-#run bash
+  - ruby-full
+  - ruby-bundler
+  - build-essential
+  - mongodb
 runcmd:
-# - git clone -b monolith https://github.com/express42/reddit.git
- - [ bash, /home/yc-user/bootstrap.sh ]
+  - systemctl start mongodb
+  - systemctl enable mongodb
+  - git clone -b monolith https://github.com/express42/reddit.git
+  - cd /reddit/
+  - /usr/bin/bundle install
+  - puma -d
