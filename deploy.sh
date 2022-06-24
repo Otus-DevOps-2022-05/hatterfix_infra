@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Installing git:"
-PACKS="git"
+PACKS="git lsof"
 USER="yc-user"
 PATH-$(pwd)
 apt-get update
@@ -26,3 +26,6 @@ echo "install bundle dependencies:"
 echo "run app:"
 
 puma -d
+
+lsof -i:27017
+systemctl status mongod
