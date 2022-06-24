@@ -6,7 +6,9 @@ users:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh_authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOxrE/m7HIAoTfeGzU55phdzZJNFDH/vEI0KQ/hYS6rG
-#clone reddit branch
+package_update: true
+packages:
+  - git
 #create script
 write_files:
   - path: /home/yc-user/bootstrap.sh
