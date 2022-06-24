@@ -1,18 +1,32 @@
 #!/bin/bash
-echo "Installing git:"
-PACKS="git lsof"
+
+echo "Installing ruby & bundle packs:"
+
+PACKS="ruby-full ruby-bundler build-essential libcurl3 git"
 USER="yc-user"
-PATH-$(pwd)
+DEBPATH="/srv/MongoDB/4.2/"
+DEBINST="mongodb-org-tools_4.2.10_amd64.deb mongodb-org-mongos_4.2.10_amd64.deb mongodb-org-server_4.2.10_amd64.deb mongodb-org-shell_4.2.10_amd64.deb mongodb-org_4.2.10_amd64.deb"
 apt-get update
 apt-get install $PACKS -y
+
+echo "clone Mongodb repo:"
+
+git clone https://github.com/hatterfix/MongoDB.git
+
+echo "move & install mongo:"
+
+cd $DEBPATH
+
+dpkg -i $DEBINST
+
+echo "run & put mongodb to autostart:"
+systemctl start mongod
+systemctl enable mongod
 
 echo "clone remote branch monolith to our folder:"
 
 git clone -b monolith https://github.com/express42/reddit.git
 
-pwd
-
-ls -l
 
 echo "move to reddit project folder:"
 
@@ -26,6 +40,3 @@ echo "install bundle dependencies:"
 echo "run app:"
 
 puma -d
-
-lsof -i:27017
-systemctl status mongod
