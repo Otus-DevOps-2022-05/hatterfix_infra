@@ -1,0 +1,52 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "service_account_key_file": "/home/hatter/key.json",
+            "ssh_username" : "ubuntu",
+            "folder_id": "b1gb9b379sd4f3hc8sc1",
+            "source_image_family": "ubuntu-1604-lts",
+            "image_name": "reddit-base-{{timestamp}}",
+            "image_family": "reddit-base",
+            "ssh_wait_timeout": "10m",
+            "platform_id" : "standard-v2",
+            "subnet_id" : "e9b83j34mkv9etq0q9kc",
+            "zone": "ru-central1-a",
+            "use_ipv4_nat" : "true",
+            "instance_cores": 2,
+            "instance_mem_gb": 2,
+            "disk_size_gb": 15
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+              "sleep 20"
+            ]
+          },
+        {
+            "type": "shell",
+            "inline": [
+              "cloud-init status --wait"
+            ]
+          },
+        {
+            "type": "shell",
+            "script": "scripts/install_ruby.sh",
+            "environment_vars" : [
+                   "DEBIAN_FRONTEND=noninteractive"
+                    ],
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "environment_vars" : [
+                   "DEBIAN_FRONTEND=noninteractive"
+                    ],
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
