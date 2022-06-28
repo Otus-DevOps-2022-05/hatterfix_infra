@@ -1,0 +1,7 @@
+{
+    "service_account_key_file": "/oh/some/path/key.json",
+    "folder_id": "b1gb9b379sd4f94cc8c1",
+    "source_image_family": "ubuntu-1604-lts",
+    "subnet_id" : "e9b83j34mkv9jaq0q9kc",
+    "environment_vars" : "DEBIAN_FRONTEND=noninteractive"
+}
