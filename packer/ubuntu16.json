@@ -2,14 +2,14 @@
     "builders": [
         {
             "type": "yandex",
-            "service_account_key_file": "/home/hatter/key.json",
+            "service_account_key_file": "{{user `service_account_key_file`}}",
             "ssh_username" : "ubuntu",
-            "folder_id": "b1gb9b379sd4f3hc8sc1",
-            "source_image_family": "ubuntu-1604-lts",
+            "folder_id": "{{user `folder_id`}}",
+            "source_image_family": "user {{user `source_image_family`}}",
             "image_name": "reddit-base-{{timestamp}}",
             "image_family": "reddit-base",
             "platform_id" : "standard-v2",
-            "subnet_id" : "e9b83j34mkv9etq0q9kc",
+            "subnet_id" : "{{user `subnet_id`}}",
             "zone": "ru-central1-a",
             "use_ipv4_nat" : "true",
             "instance_cores": 2,
