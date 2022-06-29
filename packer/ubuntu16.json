@@ -8,7 +8,6 @@
             "source_image_family": "ubuntu-1604-lts",
             "image_name": "reddit-base-{{timestamp}}",
             "image_family": "reddit-base",
-            "ssh_wait_timeout": "10m",
             "platform_id" : "standard-v2",
             "subnet_id" : "e9b83j34mkv9etq0q9kc",
             "zone": "ru-central1-a",
