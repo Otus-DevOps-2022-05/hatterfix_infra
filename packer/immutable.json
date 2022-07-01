@@ -1,0 +1,66 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "service_account_key_file": "{{user `service_account_key_file`}}",
+            "ssh_username" : "ubuntu",
+            "folder_id": "{{user `folder_id`}}",
+            "source_image_family": "{{user `source_image_family`}}",
+            "image_name": "reddit-base-{{timestamp}}",
+            "image_family": "reddit-full",
+            "ssh_wait_timeout": "10m",
+            "platform_id" : "standard-v2",
+            "subnet_id" : "{{user `subnet_id`}}",
+            "zone": "ru-central1-a",
+            "use_ipv4_nat" : "true",
+            "instance_cores": 2,
+            "instance_mem_gb": 2,
+            "disk_size_gb": 15
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+              "sleep 20"
+            ]
+          },
+        {
+            "type": "shell",
+            "inline": [
+              "cloud-init status --wait"
+            ]
+          },
+        {
+            "type": "shell",
+            "inline":[
+              "echo `run all in folder {{user `folder_id`}}`",
+              "echo `Update apt cache`",
+              "sudo apt-get update",
+              "sudo apt-get install -y ruby-full ruby-bundler build-essential mongodb git",
+              "sudo systemctl start mongodb",
+              "sudo systemctl enable mongodb",
+              "cd /opt/",
+              "sudo git clone -b monolith https://github.com/express42/reddit.git",
+              "cd reddit && bundle install"
+            ]
+        },
+        {
+          "type": "file",
+          "source": "files/puma.d",
+          "destination": "/tmp/puma.d"
+        },
+
+        {
+        "type": "shell",
+        "inline":[
+          "sudo mv /tmp/puma.d /etc/systemd/system/pumad.service",
+          "sudo chmod 755 /etc/systemd/system/pumad.service",
+          "sudo chown root:root /etc/systemd/system/pumad.service",
+          "sudo systemctl start pumad",
+          "sudo systemctl enable pumad"
+          ]
+        }
+    ]
+}
