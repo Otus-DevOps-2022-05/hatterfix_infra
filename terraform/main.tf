@@ -45,4 +45,8 @@ platform_id="standard-v2"
   source = "files/puma.service"
   destination = "/tmp/puma.service"
   }
+
+  provisioner "remote-exec" {
+  script = "files/deploy.sh"
+  }
 }
