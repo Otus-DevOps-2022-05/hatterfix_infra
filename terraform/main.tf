@@ -40,4 +40,9 @@ platform_id="standard-v2"
     subnet_id = "e9b83j34mkv9etq0q9kc"
     nat       = true
   }
+
+  provisioner "file" {
+  source = "files/puma.service"
+  destination = "/tmp/puma.service"
+  }
 }
