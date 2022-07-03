@@ -9,17 +9,17 @@ terraform {
 #cloud connection id's:
 provider "yandex" {
 version   = "0.35"
-token = "AQAAAABiRgsdAATuwcG98aBcH0_UmNpNcKboKAM"
-cloud_id = "<b1ggm1096pprqloi3qe2"
-folder_id = "b1gb9b379sd4f3hc8sc1"
-zone = "ru-central1-a"
+service_account_key_file = var.service_account_key_file
+cloud_id = var.cloud_id
+folder_id = var.folder_id
+zone = var.zone
 }
 #instance resource description section:
 resource "yandex_compute_instance" "app" {
   name = "reddit-app"
 #add pubkey to user from local file:
    metadata = {
-   ssh-keys = "ubuntu:${file("~/.ssh/3kIT_ed_ND.pub")}"
+   ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
 
   resources {
@@ -33,13 +33,13 @@ platform_id="standard-v2"
   boot_disk {
     initialize_params {
       #my packer-base image ID
-      image_id = "fd84rgtv70aufps6aak2"
+      image_id = var.image_id
     }
   }
 
   network_interface {
     #my ru-central1-a ID
-    subnet_id = "e9b83j34mkv9etq0q9kc"
+    subnet_id = var.subnet_id
     nat       = true
   }
 #provisioners instance connection details:
