@@ -16,6 +16,10 @@ zone = "ru-central1-a"
 resource "yandex_compute_instance" "app" {
   name = "reddit-app"
 
+   metadata = {
+   ssh-keys = "ubuntu:${file("~/.ssh/3kIT_ed_ND.pub")}"
+  }
+
   resources {
     core_fraction = 5
     cores  = 2
