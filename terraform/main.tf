@@ -48,7 +48,7 @@ platform_id="standard-v2"
   host = yandex_compute_instance.app.network_interface.0.nat_ip_address
   user = "ubuntu"
   agent = false
-  private_key = file("~/.ssh/3kIT_ed_ND")
+  private_key = file(var.private_key_path)
   }
 #provisioners remote instance actions:
 #copy unitd:
