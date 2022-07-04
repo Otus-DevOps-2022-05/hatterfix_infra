@@ -4,7 +4,7 @@ terraform {
     #If use "~> 0.35" will be installed higher ver.
     yandex = "0.35"
   }
-  required_version = "0.12.8"
+  required_version = "0.12.19"
 }
 #cloud connection id's:
 provider "yandex" {
