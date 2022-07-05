@@ -16,7 +16,8 @@ provider "yandex" {
 }
 #instance-1 resource description section:
 resource "yandex_compute_instance" "app" {
-  name = "reddit-app"
+  count = var.counts
+  name  = "reddit-app${count.index}"
   #add pubkey to user from local file:
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
@@ -45,54 +46,7 @@ resource "yandex_compute_instance" "app" {
   #provisioners instance connection details:
   connection {
     type        = "ssh"
-    host        = yandex_compute_instance.app.network_interface.0.nat_ip_address
-    user        = "ubuntu"
-    agent       = false
-    private_key = file(var.private_key_path)
-  }
-  #provisioners remote instance actions:
-  #copy unitd:
-  provisioner "file" {
-    source      = "files/puma.service"
-    destination = "/tmp/puma.service"
-  }
-  #run bash on remote instance:
-  provisioner "remote-exec" {
-    script = "files/deploy.sh"
-  }
-}
-#instance-2 resource description section:
-resource "yandex_compute_instance" "app2" {
-  name = "reddit-app2"
-  #add pubkey to user from local file:
-  metadata = {
-    ssh-keys = "ubuntu:${file(var.public_key_path)}"
-  }
-
-  resources {
-    core_fraction = 5
-    cores         = 2
-    memory        = 2
-  }
-
-  platform_id = "standard-v2"
-
-  boot_disk {
-    initialize_params {
-      #my packer-base image ID
-      image_id = var.image_id
-    }
-  }
-
-  network_interface {
-    #my ru-central1-a ID
-    subnet_id = var.subnet_id
-    nat       = true
-  }
-  #provisioners instance connection details:
-  connection {
-    type        = "ssh"
-    host        = yandex_compute_instance.app2.network_interface.0.nat_ip_address
+    host        = self.network_interface.0.nat_ip_address
     user        = "ubuntu"
     agent       = false
     private_key = file(var.private_key_path)
