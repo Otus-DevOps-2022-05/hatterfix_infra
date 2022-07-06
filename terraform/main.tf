@@ -40,8 +40,9 @@ resource "yandex_compute_instance" "app" {
 
   network_interface {
     #my ru-central1-a ID
-    subnet_id = var.subnet_id
+    subnet_id = yandex_vpc_subnet.app-subnet.id
     nat       = true
+
   }
   #provisioners instance connection details:
   connection {
