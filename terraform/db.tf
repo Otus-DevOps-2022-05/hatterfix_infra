@@ -1,13 +1,18 @@
 resource "yandex_compute_instance" "db" {
-  name = "reddit-db"
+  count = var.counts
+  name  = "reddit-db${count.index}"
+
   labels = {
     tags = "reddit-db"
   }
 
-  resources {
-    cores  = 1
-    memory = 2
+    resources {
+    core_fraction = 5
+    cores         = 2
+    memory        = 2
   }
+
+  platform_id = "standard-v2"
 
   boot_disk {
     initialize_params {
