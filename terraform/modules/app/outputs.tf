@@ -17,6 +17,7 @@
 #}
 
 #Outputs for multicount instances
+
 output "all_inst_app_internal_IPs" {
   value = yandex_compute_instance.app[*].network_interface.0.ip_address
 }

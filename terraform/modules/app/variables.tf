@@ -4,6 +4,7 @@ variable public_key_path {
 
 variable counts {
   description = "instance count"
+  default     = "1"
 }
 
 variable app_disk_image {
