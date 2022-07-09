@@ -10,9 +10,9 @@ terraform {
     endpoint   = "storage.yandexcloud.net"
     bucket     = "tf-app-bucket"
     region     = "ru-central1"
-    key        = "prod/terraform.tfstate"
-    access_key = var.access_key
-    secret_key = var.secret_key
+    key        = "terraform.tfstate"
+    access_key = "YCAJET4fC106BE2GZcGKnZCZt"
+    secret_key = "YCMbwe8cLgNgXrQxv11HmWiZRMyn3YfG4AgQRl9-"
 
     skip_region_validation      = true
     skip_credentials_validation = true
