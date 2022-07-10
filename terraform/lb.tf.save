@@ -1,0 +1,50 @@
+terraform {
+  required_providers {
+    #Set provider version that will be installed.
+    #If use "~> 0.35" will be installed higher ver.
+    yandex = "0.35"
+  }
+  required_version = "0.12.19"
+}
+#cloud connection id's:
+provider "yandex" {
+  version                  = "0.35"
+  service_account_key_file = var.service_account_key_file
+  cloud_id                 = var.cloud_id
+  folder_id                = var.folder_id
+  zone                     = var.zone
+
+resource "yandex_lb_target_group" "reddit-group" {
+  zone.id = var.zone
+  folder_id = var.folder_id
+  name = "test-balanver"
+}
+
+resource "yandex_lb_target_group" "foo" {
+  name      = "my-target-group"
+
+  target {
+    subnet_id =
+    address   = "<внутренний IP-адрес ресурса>"
+	}
+}
+resource "yandex_lb_network_load_balancer" "lbalance" {
+  name = "test-balancer"
+  listener {
+    name = "checker"
+    port = 9292
+    external_address_spec {
+      ip_version = "ipv4"
+    }
+  }
+  attached_target_group {
+    target_group_id = ""
+    healthcheck {
+      name = "healthcheck"
+        http_options {
+          port = 9292
+          path = "/ping"
+        }
+    }
+  }
+}

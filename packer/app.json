@@ -6,8 +6,8 @@
             "ssh_username" : "ubuntu",
             "folder_id": "{{user `folder_id`}}",
             "source_image_family": "{{user `source_image_family`}}",
-            "image_name": "reddit-base-{{timestamp}}",
-            "image_family": "reddit-base",
+            "image_name": "reddit-app-base-{{timestamp}}",
+            "image_family": "reddit-app-base",
             "platform_id" : "standard-v2",
             "subnet_id" : "{{user `subnet_id`}}",
             "zone": "ru-central1-a",
@@ -34,14 +34,6 @@
         {
             "type": "shell",
             "script": "scripts/install_ruby.sh",
-            "environment_vars" : [
-                   "DEBIAN_FRONTEND=noninteractive"
-                    ],
-            "execute_command": "sudo {{.Path}}"
-        },
-        {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
             "environment_vars" : [
                    "DEBIAN_FRONTEND=noninteractive"
                     ],
