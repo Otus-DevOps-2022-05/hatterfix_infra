@@ -39,7 +39,6 @@
 #output "all_inst_db_external_IPs" {
 #  value = yandex_compute_instance.db[*].network_interface.0.nat_ip_address
 #}
-
 output "external_ip_address_app" {
   value = module.app.all_inst_app_external_IPs
 }
@@ -52,5 +51,8 @@ output "external_ip_address_db" {
 }
 
 output "internal_ip_address_db" {
+  value = module.db.all_inst_db_internal_IPs
+}
+output "ip_mongodb" {
   value = module.db.all_inst_db_internal_IPs
 }
