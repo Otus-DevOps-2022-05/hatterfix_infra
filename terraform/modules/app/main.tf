@@ -27,4 +27,21 @@ resource "yandex_compute_instance" "app" {
   metadata = {
   ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
+  connection {
+    type        = "ssh"
+    host        = self.network_interface.0.nat_ip_address
+    user        = "ubuntu"
+    agent       = false
+    private_key = file(var.private_key_path)
+  }
+  #provisioners remote instance actions:
+  #copy unitd:
+provisioner "file" {
+    source      = "${path.module}/files//puma.service"
+    destination = "/tmp/puma.service"
+  }
+  #run bash on remote instance:
+provisioner "remote-exec" {
+    script = "${path.module}/files/deploy.sh"
+  }
 }

@@ -15,3 +15,10 @@ variable app_disk_image {
 variable subnet_id {
 description = "Subnets for modules"
 }
+
+variable private_key_path {
+  description = "Path to private key for provisioner access"
+}
+variable ip_mongod {
+description = "private mongod IP"
+}
