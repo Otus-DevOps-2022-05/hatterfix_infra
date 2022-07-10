@@ -1,3 +1,8 @@
+#locals {
+#  ip_mongod = templatefile("${path.module}/files/puma.service", {
+#    ip_mongod = var.ip_mongod
+#  })
+#  }
 resource "yandex_compute_instance" "app" {
   count = var.counts
   name  = "reddit-app${count.index}"
@@ -37,7 +42,7 @@ resource "yandex_compute_instance" "app" {
   #provisioners remote instance actions:
   #copy unitd:
 provisioner "file" {
-    source      = "${path.module}/files//puma.service"
+    content     = templatefile("${path.module}/files/puma.service", { ip_mongod = var.ip_mongod})
     destination = "/tmp/puma.service"
   }
   #run bash on remote instance:

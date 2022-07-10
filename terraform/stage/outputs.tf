@@ -53,3 +53,6 @@ output "external_ip_address_db" {
 output "internal_ip_address_db" {
   value = module.db.all_inst_db_internal_IPs
 }
+output "ip_mongodb" {
+  value = module.db.all_inst_db_internal_IPs
+}
