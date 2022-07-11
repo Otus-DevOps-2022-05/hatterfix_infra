@@ -1,5 +1,7 @@
-#reddit-app0 creds:
+#host groups:
+
+[app]
 appserver ansible_host=51.250.95.9
 
-#reddit-db0 creds:
+[db]
 dbserver ansible_host=51.250.95.236
