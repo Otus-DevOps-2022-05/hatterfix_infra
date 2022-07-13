@@ -34,3 +34,12 @@ module "db" {
 module "vpc" {
   source = "../modules/vpc"
 }
+resource "local_file" "dynamic_inventory" {
+  content = templatefile("../files/ansible_inventory",
+    {
+      appserver = module.app.all_inst_app_external_IPs
+      dbserver = module.db.all_inst_db_external_IPs
+    }
+  )
+  filename = "/home/hatter/git/hatterfix_infra/ansible/inventory.json"
+}

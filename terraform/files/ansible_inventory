@@ -1,0 +1,18 @@
+{
+    "all": {
+      "hosts": {
+        "${appserver}": null,
+        "${dbserver}": null
+      }
+    },
+    "app": {
+      "hosts": {
+        "${appserver}": null
+      }
+    },
+    "db": {
+      "hosts": {
+        "${dbserver}": null
+      }
+    }
+  }
