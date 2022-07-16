@@ -35,14 +35,15 @@ resource "yandex_compute_instance" "db" {
     agent       = false
     private_key = file(var.private_key_path)
   }
-  #provisioners remote instance actions:
-  #copy unitd:
-provisioner "file" {
-    content     = templatefile("${path.module}/files/mongod.conf", { ip_mongod = yandex_compute_instance.db.0.network_interface.0.ip_address})
-    destination = "/tmp/mongod.conf"
-  }
-  #run bash on remote instance:
-provisioner "remote-exec" {
-    script = "${path.module}/files/replace_mongo_conf.sh"
-  }
+  # commented for ansible-2
+#   #provisioners remote instance actions:
+#   #copy unitd:
+# provisioner "file" {
+#     content     = templatefile("${path.module}/files/mongod.conf", { ip_mongod = yandex_compute_instance.db.0.network_interface.0.ip_address})
+#     destination = "/tmp/mongod.conf"
+#   }
+#   #run bash on remote instance:
+# provisioner "remote-exec" {
+#     script = "${path.module}/files/replace_mongo_conf.sh"
+#   }
 }

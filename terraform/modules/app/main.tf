@@ -39,14 +39,15 @@ resource "yandex_compute_instance" "app" {
     agent       = false
     private_key = file(var.private_key_path)
   }
-  #provisioners remote instance actions:
-  #copy unitd:
-provisioner "file" {
-    content     = templatefile("${path.module}/files/puma.service", { ip_mongod = var.ip_mongod})
-    destination = "/tmp/puma.service"
-  }
-  #run bash on remote instance:
-provisioner "remote-exec" {
-    script = "${path.module}/files/deploy.sh"
-  }
+   # commented for ansible-2
+#   #provisioners remote instance actions:
+#   #copy unitd:
+# provisioner "file" {
+#     content     = templatefile("${path.module}/files/puma.service", { ip_mongod = var.ip_mongod})
+#     destination = "/tmp/puma.service"
+#   }
+#   #run bash on remote instance:
+# provisioner "remote-exec" {
+#     script = "${path.module}/files/deploy.sh"
+#   }
 }
