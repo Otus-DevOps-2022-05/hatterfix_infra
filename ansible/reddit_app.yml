@@ -6,7 +6,31 @@
     - name: Change mongo config file
       become: true
       template:
-        src: templates/mongod.conf.j2
-        dest: /etc/mongod.conf
-        mode: 0644
-  tags: db-tag # <-- Список тэгов для задачи
+          src: templates/mongod.conf.j2
+          dest: /etc/mongod.conf
+          mode: 0644
+      tags: db-tag # <-- тег для задач с db
+      notify: restart mongod
+
+    - name: Add unit file for Puma
+      become: true
+      copy:
+        src: files/puma.service
+        dest: /etc/systemd/system/puma.service
+      tags: app-tag # <-- тег для задач с app
+      notify: reload puma
+
+    - name: enable puma
+      become: true
+      systemd: name=puma enabled=yes
+      tags: app-tag # <-- тег для задач с app
+      notify: reload puma
+
+  handlers: # <-- handler на рестарт сераисов
+      - name: restart mongod
+        become: true
+        service: name=mongod state=restarted
+
+      - name: reload puma
+        become: true
+        service: name=puma state=restarted
