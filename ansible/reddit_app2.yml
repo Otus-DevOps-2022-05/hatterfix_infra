@@ -12,7 +12,7 @@
           mode: 0644
       notify: restart mongod
 
-  handlers: # <-- handler на рестарт сераисов
+  handlers: # <-- handler на рестарт mongod
       - name: restart mongod
         service: name=mongod state=restarted
 
@@ -38,6 +38,34 @@
       systemd: name=puma enabled=yes
       notify: reload puma
 
-  handlers: # <-- handler на рестарт сераисов
+  handlers: # <-- handler на рестар puma.service
+      - name: reload puma
+        service: name=puma state=restarted
+
+- name: Deploy App
+  hosts: app
+  tags: deploy-tag # <-- тег для задач с deploy
+  become: true
+
+  tasks:
+    - name: Install git
+      apt:
+          name: git
+          state: present
+          update_cache: yes
+
+    - name: Fetch the latest version of application code
+      git:
+          repo: 'https://github.com/express42/reddit.git'
+          dest: /home/ubuntu/reddit
+          version: monolith # <-- Указываем нужную ветку
+      notify: reload puma
+
+    - name: Bundle install
+      bundler:
+            state: present
+            chdir: /home/ubuntu/reddit
+
+  handlers: # <-- handler на рестар puma.service
       - name: reload puma
         service: name=puma state=restarted
