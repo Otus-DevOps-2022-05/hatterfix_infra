@@ -1,0 +1,43 @@
+- name: Configure MongoDB
+  hosts: db
+  tags: db-tag # <-- тег для задач с db
+  become: true
+  vars:
+      mongo_bind_ip: 0.0.0.0 # <-- Переменная задается в блоке vars
+  tasks:
+    - name: Change mongo config file
+      template:
+          src: templates/mongod.conf.j2
+          dest: /etc/mongod.conf
+          mode: 0644
+      notify: restart mongod
+
+  handlers: # <-- handler на рестарт сераисов
+      - name: restart mongod
+        service: name=mongod state=restarted
+
+- name: Configure App
+  hosts: app
+  tags: app-tag # <-- тег для задач с app
+  become: true
+  vars:
+      db_host: 192.168.10.15
+  tasks:
+    - name: Add unit file for Puma
+      copy:
+        src: files/puma.service
+        dest: /etc/systemd/system/puma.service
+      notify: reload puma
+
+    - name: Add config for DB connection
+      template:
+          src: templates/db_config.j2
+          dest: /home/ubuntu/db_config
+
+    - name: enable puma
+      systemd: name=puma enabled=yes
+      notify: reload puma
+
+  handlers: # <-- handler на рестарт сераисов
+      - name: reload puma
+        service: name=puma state=restarted

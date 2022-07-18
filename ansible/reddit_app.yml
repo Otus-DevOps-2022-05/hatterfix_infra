@@ -52,7 +52,7 @@
     - name: Bundle install
       bundler:
             state: present
-            chdir: /home/ubuntu/reddit #
+            chdir: /home/ubuntu/reddit
       tags: deploy-tag
 
   handlers: # <-- handler на рестарт сераисов
