@@ -1,0 +1,15 @@
+#host groups:
+all:
+  hosts:
+    app:
+        ansible_host: 51.250.88.147
+    db
+        ansible_host: 51.250.94.220
+app:
+  hosts:
+    app:
+      ansible_host: 51.250.88.147
+db:
+  hosts:
+    db:
+      ansible_host: 51.250.94.220
