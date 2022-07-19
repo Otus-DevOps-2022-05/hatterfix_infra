@@ -3,7 +3,7 @@
   tags: app-tag # <-- тег для задач с app
   become: true
   vars:
-      db_host: 192.168.10.12
+      db_host: 192.168.10.7
   tasks:
     - name: Add unit file for Puma
       copy:

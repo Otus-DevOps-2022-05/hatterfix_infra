@@ -1,4 +1,3 @@
-#host groups:
 all:
   hosts:
     appserver:
