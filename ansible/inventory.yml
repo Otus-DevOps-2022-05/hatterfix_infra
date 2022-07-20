@@ -1,15 +1,15 @@
 #host groups:
 all:
   hosts:
-    appserver:
-        ansible_host: 51.250.95.9
-    dbserver:
-        ansible_host: 51.250.95.236
+    app:
+        ansible_host: 51.250.88.147
+    db
+        ansible_host: 51.250.94.220
 app:
   hosts:
-    appserver:
-      ansible_host: 51.250.95.9
+    app:
+      ansible_host: 51.250.88.147
 db:
   hosts:
-    dbserver:
-      ansible_host: 51.250.95.236
+    db:
+      ansible_host: 51.250.94.220
