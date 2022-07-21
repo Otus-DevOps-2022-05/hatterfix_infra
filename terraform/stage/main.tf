@@ -41,5 +41,5 @@ resource "local_file" "dynamic_inventory" {
       dbserver = module.db.all_inst_db_external_IPs
     }
   )
-  filename = "/home/hatter/git/hatterfix_infra/ansible/inventory.json"
+  filename = "../../ansible/environments/stage/inventory.json"
 }
