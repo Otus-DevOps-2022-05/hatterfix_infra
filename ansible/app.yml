@@ -2,8 +2,6 @@
   hosts: app
   tags: app-tag # <-- тег для задач с app
   become: true
-  vars:
-      db_host: 192.168.10.22
 
   roles:
     - app
