@@ -34,3 +34,31 @@ module "db" {
 module "vpc" {
   source = "../modules/vpc"
 }
+
+resource "local_file" "dynamic_inventory" {
+  content = templatefile("../files/ansible_inventory",
+    {
+      appserver = module.app.all_inst_app_external_IPs
+      dbserver = module.db.all_inst_db_external_IPs
+    }
+  )
+  filename = "../../ansible/environments/prod/inventory.json"
+}
+
+resource "local_file" "mongo_bind_ip" {
+  content = templatefile("../files/mongo_bind_ip",
+    {
+      mongo_bind_ip = module.db.all_inst_db_internal_IPs
+    }
+  )
+  filename = "../../ansible/environments/prod/group_vars/db"
+}
+
+resource "local_file" "db_host_for_app" {
+  content = templatefile("../files/db_host",
+    {
+      db_host = module.db.all_inst_db_internal_IPs
+    }
+  )
+  filename = "../../ansible/environments/prod/group_vars/app"
+}
