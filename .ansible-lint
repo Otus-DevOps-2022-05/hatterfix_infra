@@ -1,0 +1,8 @@
+
+
+exclude_paths:
+- .github/
+- ansible/roles/jdauphant.nginx
+
+skip_list:
+- yaml
