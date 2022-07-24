@@ -24,7 +24,7 @@ jobs:
       - name: Prepare variables files
         uses: canastro/copy-file-action@master
         with:
-          source: packer/variables.json.example
+          source: ./packer/variables.json.example
           target: variables.json
 
       - name: Validate template
@@ -32,4 +32,4 @@ jobs:
         with:
           command: validate
           target: ./packer/ubuntu16.json
-          arguments: "--var-file=variables.json.example --syntax-only"
+          arguments: "--var-file=variables.json --syntax-only"
