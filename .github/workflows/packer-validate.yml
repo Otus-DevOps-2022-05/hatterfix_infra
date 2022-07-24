@@ -17,19 +17,19 @@ jobs:
       - name: Checkout repo with tests
         uses: actions/checkout@v2
         with:
-          repository: "express42/otus-homeworks"
-          ref: 2022-02
-          path: "./otus-homeworks/"
+          repository: "Otus-DevOps-2022-05/hatterfix_infra"
+#         ref: 2022-02
+          path: "./packer/"
 
       - name: Prepare variables files
         uses: canastro/copy-file-action@master
         with:
-          source: ./packer/variables.json.example
+          source: variables.json.example
           target: variables.json
 
       - name: Validate template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          target: ./packer/ubuntu16.json
+          target: ubuntu16.json
           arguments: "--var-file=variables.json --syntax-only"
