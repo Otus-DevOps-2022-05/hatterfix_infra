@@ -11,4 +11,4 @@ testapp_port = 9292
 
 
 #ansible lint badge:
-[ansible-lint check status](https://github.com/Otus-DevOps-2022-05/hatterfix_infra/.github/workflows/ansible-lint.yml/badge.svg?branch=ansible-3)
+![ansible-lint check status](https://github.com/Otus-DevOps-2022-05/hatterfix_infra/.github/workflows/ansible-lint.yml/badge.svg?branch=ansible-3)
