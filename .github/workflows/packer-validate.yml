@@ -17,9 +17,9 @@ jobs:
       - name: Checkout repo with tests
         uses: actions/checkout@v2
         with:
-        repository: "express42/otus-homeworks"
-        ref: 2022-02
-        path: "./otus-homeworks/"
+          repository: "express42/otus-homeworks"
+          ref: 2022-02
+          path: "./otus-homeworks/"
 
       - name: Prepare variables files
         uses: canastro/copy-file-action@master
