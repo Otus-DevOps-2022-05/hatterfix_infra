@@ -8,9 +8,9 @@ on:
 
 jobs:
   packer:
-    strategy:
-      matrix:
-        packer-config: ["app.json", "db.json", "immutable.json", "ubuntu16.json"]
+#    strategy:
+#      matrix:
+#        packer-config: ["app.json", "db.json", "immutable.json", "ubuntu16.json"]
     runs-on: ubuntu-latest
 
     steps:
@@ -31,5 +31,5 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          target: ./packer/${{ matrix.packer-config }}
-          arguments: "--var-file=variables.json --syntax-only"
+          target: ./packer/ubuntu16.json
+          arguments: "--var-file=variables.json.example --syntax-only"
