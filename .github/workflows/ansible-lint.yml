@@ -26,3 +26,6 @@ jobs:
           ./ansible/playbooks
           ./ansible/roles
         args: "-c .ansible-lint"
+
+    - name: markdown-autodocs
+      uses: dineshsonachalam/markdown-autodocs@v1.0.4
