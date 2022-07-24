@@ -1,0 +1,8 @@
+- name: Configure App
+  hosts: app
+  tags: app-tag # <-- тег для задач с app
+  become: true
+
+  roles:
+    - app
+    - jdauphant.nginx

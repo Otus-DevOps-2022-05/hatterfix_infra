@@ -41,5 +41,23 @@ resource "local_file" "dynamic_inventory" {
       dbserver = module.db.all_inst_db_external_IPs
     }
   )
-  filename = "/home/hatter/git/hatterfix_infra/ansible/inventory.json"
+  filename = "../../ansible/environments/stage/inventory.json"
+}
+
+resource "local_file" "mongo_bind_ip" {
+  content = templatefile("../files/mongo_bind_ip",
+    {
+      mongo_bind_ip = module.db.all_inst_db_internal_IPs
+    }
+  )
+  filename = "../../ansible/environments/stage/group_vars/db"
+}
+
+resource "local_file" "db_host_for_app" {
+  content = templatefile("../files/db_host",
+    {
+      db_host = module.db.all_inst_db_internal_IPs
+    }
+  )
+  filename = "../../ansible/environments/stage/group_vars/app"
 }

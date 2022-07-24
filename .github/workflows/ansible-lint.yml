@@ -1,0 +1,31 @@
+name: Run Ansible Lint
+
+on:
+  push:
+    branches-ignore: main
+  pull_request:
+    branches-ignore: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo with tests
+      uses: actions/checkout@v2
+      with:
+        repository: "express42/otus-homeworks"
+        ref: 2022-02
+        path: "./otus-homeworks/"
+
+
+    - name: Lint Ansible Playbooks
+      uses: ansible/ansible-lint-action@main
+      with:
+        targets: |
+          ./ansible/playbooks
+          ./ansible/roles
+        args: "-c .ansible-lint"
+
+    - name: markdown-autodocs
+      uses: dineshsonachalam/markdown-autodocs@v1.0.4

@@ -1,0 +1,7 @@
+#host groups:
+
+[app]
+appserver ansible_host=51.250.95.9
+
+[db]
+dbserver ansible_host=51.250.95.236

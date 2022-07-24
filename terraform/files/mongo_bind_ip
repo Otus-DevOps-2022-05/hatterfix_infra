@@ -1,0 +1,1 @@
+mongo_bind_ip: ${mongo_bind_ip}

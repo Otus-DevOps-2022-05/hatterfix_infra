@@ -1,0 +1,13 @@
+plugin: yc_compute
+folders:
+  - b1gb9b379sd4f3hc8sc1
+filters:
+  - status == 'RUNNING'
+auth_kind: serviceaccountfile
+service_account_file: /home/hatter/otus-DevOPS/ansible/keys/key.json
+compose:
+  ansible_host: network_interfaces[0].primary_v4_address.one_to_one_nat.address
+groups:
+  db: labels['tags'] == 'reddit-db'
+  app: labels['tags'] == 'reddit-app'
+...
