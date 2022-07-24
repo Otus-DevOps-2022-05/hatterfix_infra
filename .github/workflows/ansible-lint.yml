@@ -7,14 +7,10 @@ on:
     branches-ignore: main
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout this repo
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.ref }}
     - name: Checkout repo with tests
       uses: actions/checkout@v2
       with:
