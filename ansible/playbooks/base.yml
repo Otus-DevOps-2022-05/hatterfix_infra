@@ -1,0 +1,10 @@
+---
+- name: Check && install python3
+  hosts: all
+  become: true
+  gather_facts: False
+
+  tasks:
+    - name: Install python3 for Ansible
+      raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
+      changed_when: False
