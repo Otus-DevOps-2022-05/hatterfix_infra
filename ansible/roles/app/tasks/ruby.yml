@@ -1,4 +1,4 @@
-  tasks:
+
   - name: Wait for system to become reachable
     wait_for_connection:
      timeout: 45
@@ -7,6 +7,11 @@
   - name: Wait for cloud-init / user-data to finish
     command: cloud-init status --wait
     changed_when: false
+    tags: ruby
+
+  - name: Update apt indexes to make ruby avalible
+    apt:
+      update_cache: yes
     tags: ruby
 
   # Установим в цикле все зависимости
