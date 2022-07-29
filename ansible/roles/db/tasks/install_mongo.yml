@@ -1,21 +1,25 @@
     - name: Wait for system to become reachable
       wait_for_connection:
         timeout: 70
+      tags: install
 
     - name: Wait for cloud-init / user-data to finish
       command: cloud-init status --wait
       changed_when: false
+      tags: install
 
     - name: Install git & libcurl3
       apt: "name={{ item }} state=present"
       with_items:
       - libcurl3
       - git
+      tags: install
 
     - name: get mongodb debs from github
       git:
           repo: 'https://github.com/hatterfix/MongoDB.git'
           dest: /home/ubuntu/MongoDB
+      tags: install
 
     - name: Install mongod from debs
       apt:
@@ -27,8 +31,10 @@
       - /home/ubuntu/MongoDB/4.2/mongodb-org-shell_4.2.10_amd64.deb
       - /home/ubuntu/MongoDB/4.2/mongodb-org_4.2.10_amd64.deb
       notify: start mongod
+      tags: install
 
     - name: Configure service supervisor
       systemd:
         name: mongod
         enabled: yes
+      tags: install
