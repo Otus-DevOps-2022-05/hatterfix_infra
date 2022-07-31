@@ -19,6 +19,7 @@
       git:
           repo: 'https://github.com/hatterfix/MongoDB.git'
           dest: /home/ubuntu/MongoDB
+          version: main
       tags: install
 
     - name: Install mongod from debs
