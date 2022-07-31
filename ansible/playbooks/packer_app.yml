@@ -1,19 +1,6 @@
 - name: Install Ruby && Bundler
   hosts: all
   become: true
-  tasks:
-  - name: Wait for system to become reachable
-    wait_for_connection:
-     timeout: 45
 
-  - name: Wait for cloud-init / user-data to finish
-    command: cloud-init status --wait
-    changed_when: false
-
-  # Установим в цикле все зависимости
-  - name: Install ruby and rubygems and required packages
-    apt: "name={{ item }} state=present"
-    with_items:
-      - ruby-full
-      - ruby-bundler
-      - build-essential
+  roles:
+   - app
