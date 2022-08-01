@@ -1,42 +1,6 @@
 - name: Install monhodb  debs from my git repo
   hosts: all
   become: true
-  tasks:
-    - name: Wait for system to become reachable
-      wait_for_connection:
-        timeout: 70
 
-    - name: Wait for cloud-init / user-data to finish
-      command: cloud-init status --wait
-      changed_when: false
-
-    - name: Install git & libcurl3
-      apt: "name={{ item }} state=present"
-      with_items:
-      - libcurl3
-      - git
-
-    - name: get mongodb debs from github
-      git:
-          repo: 'https://github.com/hatterfix/MongoDB.git'
-          dest: /home/ubuntu/MongoDB
-
-    - name: Install mongod from debs
-      apt:
-        deb: "{{ item }}"
-      with_items:
-      - /home/ubuntu/MongoDB/4.2/mongodb-org-tools_4.2.10_amd64.deb
-      - /home/ubuntu/MongoDB/4.2/mongodb-org-mongos_4.2.10_amd64.deb
-      - /home/ubuntu/MongoDB/4.2/mongodb-org-server_4.2.10_amd64.deb
-      - /home/ubuntu/MongoDB/4.2/mongodb-org-shell_4.2.10_amd64.deb
-      - /home/ubuntu/MongoDB/4.2/mongodb-org_4.2.10_amd64.deb
-      notify: start mongod
-
-    - name: Configure service supervisor
-      systemd:
-        name: mongod
-        enabled: yes
-
-  handlers: # <-- handler на рестарт mongod
-      - name: start mongod
-        service: name=mongod state=started
+  roles:
+   - db

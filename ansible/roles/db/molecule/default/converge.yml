@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: Update_Cache
+      become: true
+      apt:
+        update_cache: yes
+
+- name: Converge
+  become: true
+  hosts: all
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: "Include db"
+      include_role:
+        name: "db"
